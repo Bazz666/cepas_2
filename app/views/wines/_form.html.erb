@@ -16,19 +16,24 @@
     <%= form.text_field :name %>
   </div>
 
+   
+  <div class="field">
+  <%= form.label :strains %>
   <table>
-    <div class="field">
-      <%= form.label :strains %>
-      <%= form.collection_check_boxes(:strain_ids, Strain.all, :id, :name) do |b| %>
-        <%= b.label class: 'label-checkbox' do %>
-        <%= b.check_box + b.text %>
-        <br>
-        <%= form.text_field '', name:'wine[percentages][]' %>
-        <% end %>
+    <%= form.collection_check_boxes(:strain_ids, Strain.all, :id, :name) do |b| %>
+      <tr>
+        <td>
+          <%= b.label class:"label-checkbox pt-2" do %>
+          <%= b.check_box + '&nbsp;'.html_safe + b.text%>
+        </td>
+        <td>
+        <%= text_field("wine[strains_percent]", b.value, value: @wine.getPercentageByStrainId(b.value))%>
+        </td>
+      </tr>
       <% end %>
-    </div>
+    <% end %>
   </table>
-    
+</div>
   
 
   <div class="actions">

@@ -7,6 +7,7 @@ class WinesController < ApplicationController
   def index
     @wines = Wine.all
     @strains = Strain.all
+    
   end
 
   # GET /wines/1
@@ -21,18 +22,17 @@ class WinesController < ApplicationController
 
   # GET /wines/1/edit
   def edit
+    @strains = Strain.all
   end
 
   # POST /wines
   # POST /wines.json
   def create
-    @wine = Wine.new(name: wine_params[:name])
-
+    @wine = Wine.new(wine_params)
+    
     respond_to do |format|
       if @wine.save
-        wine_params[:strain_ids].reject(&:empty?).each_with_index do |id, index|
-          WineStrain.create(wine_id: @wine.id, strain_id: id, percentage: wine_params[:percentages][index])
-        end
+        @wine.addStrainPercent(params[:wine][:strains_percent])
         format.html { redirect_to @wine, notice: 'Wine was successfully created.' }
         format.json { render :show, status: :created, location: @wine }
       else
@@ -47,6 +47,8 @@ class WinesController < ApplicationController
   def update
     respond_to do |format|
       if @wine.update(wine_params)
+        
+        @wine.addStrainPercent(params[:wine][:strains_percent])
         format.html { redirect_to @wine, notice: 'Wine was successfully updated.' }
         format.json { render :show, status: :ok, location: @wine }
       else
@@ -72,8 +74,12 @@ class WinesController < ApplicationController
       @wine = Wine.find(params[:id])
     end
 
+    def strains_availables
+      @strains = Strain.where(available: true).order("name")
+    end
+
     # Only allow a list of trusted parameters through.
     def wine_params
-      params.require(:wine).permit(:name, strain_ids: [], percentages: [])
+      params.require(:wine).permit(:name,  {strain_ids:[]}, :strains_percent)
     end
 end
