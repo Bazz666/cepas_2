@@ -27,13 +27,13 @@
           <%= b.check_box + '&nbsp;'.html_safe + b.text%>
         </td>
         <td>
-        <%= text_field("wine[strains_percent]", b.value, value: @wine.getPercentageByStrainId(b.value))%>
+          <%= text_field("wine[strains_percent]", b.value, value: @wine.getPercentageByStrainId(b.value))%>
+          <% end %>
         </td>
       </tr>
-      <% end %>
     <% end %>
   </table>
-</div>
+  </div>
   
 
   <div class="actions">

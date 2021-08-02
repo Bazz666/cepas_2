@@ -4,23 +4,22 @@ class Wine < ApplicationRecord
     has_many :strains, through: :wine_strains
   
     validates :name, presence: true
+    accepts_nested_attributes_for :wine_strains, reject_if: :all_blank, allow_destroy: true
 
     
     def addStrainPercent(percents)
         percents.each do |strain_id, percentage| 
-          if percentage != "" && percentage != "0"
-          temp_strain = self.wine_strains.where(strain_id: strain_id).first
-          temp_strain.percentage = percentage.to_i
-          temp_strain.save
-          end
+            if percentage != "" 
+                temp_strain = self.wine_strains.where(strain_id: strain_id).first
+                temp_strain.percentage = percentage.to_i
+                temp_strain.save
+            end
         end
     end
     
     def getPercentageByStrainId(strain_id)
-        if self.wine_strains.where(strain_id: strain_id).first
-          self.wine_strains.where(strain_id: strain_id).first.percentage.to_i
+        if self.wine_strains.where(strain_id: strain_id.to_i).first
+            self.wine_strains.where(strain_id: strain_id.to_i).first.percentage
         end
     end
-   
-  
 end
