@@ -11,6 +11,10 @@
     </div>
   <% end %>
 
+  <br>
+  <h3>Wine Description</h3>
+  <br>
+
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
@@ -35,6 +39,33 @@
   </table>
   </div>
   
+  <br>
+  <h3>Oenologist Calification</h3>
+  <br>
+
+  <% if @oenologists %>
+      <div class="field">
+        <%= form.label :grade %>
+        <%= form.number_field :grade, id: :wine_grade %>
+      </div>
+      <br>
+      <div class="field">
+        <%= form.label :oenologists ,"Oenologists" %>
+        <br>
+        <%= form.collection_check_boxes(
+            :oenologists,
+            @oenologists,
+            :id,
+            :name) do |o| %>
+            <%= o.label class:"label-checkbox" do %>
+                <%= (@wine.oenologists.pluck(:id).include? (o.value)) ? o.check_box({checked: true}) : o.check_box %>
+                <%= o.text %>
+            <% end %>
+            <br/>
+          <% end %>
+      </div>
+  <% end %>
+
 
   <div class="actions">
     <%= form.submit %>

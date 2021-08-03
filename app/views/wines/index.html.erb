@@ -7,6 +7,7 @@
     <tr>
       <th>Wine Name</th>
       <th>Strains and percentages</th>
+      <th>Oenologist grade<th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
       <tr>
         <td><%= wine.name %></td>
         <td  class="text-left"><%= wine.strains.order(:name).map{|s| "#{s.name} (#{wine.getPercentageByStrainId(s.id)}%)"}.join(', ') %></td>
+        <td><%= wine.grade %></td>
         <td><%= link_to 'Show', wine %></td>
         <td><%= link_to 'Edit', edit_wine_path(wine) %></td>
         <td><%= link_to 'Destroy', wine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -26,4 +28,19 @@
 
 <br>
 
-<%= link_to 'New Wine', new_wine_path %>
+
+<% if current_user.admin? %>
+
+  <th><%= link_to 'Add New Wine', new_wine_path %></th>
+  <br>
+  <th><%= link_to 'Add New Strain', new_strain_path %> </th>
+  <br>
+  <th><%= link_to 'Add Oenologist', new_oenologist_path %></th>
+  <br>
+  <th><%= link_to 'Add New Magazine', new_magazine_path %> </th>
+
+
+<% end %>
+<br>
+<%= button_to "Logout", destroy_user_session_path, method: :delete, :class => 'btn btn-light mx-4'  %>
+
