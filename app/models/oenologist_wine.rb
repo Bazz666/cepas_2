@@ -1,4 +1,4 @@
 class OenologistWine < ApplicationRecord
-  belongs_to :oenologist
-  belongs_to :wine
+  belongs_to :oenologist , :optional => true
+  belongs_to :wine , :optional => true
 end
