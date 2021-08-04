@@ -5,20 +5,8 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Heroku: https://limitless-temple-52836.herokuapp.com/
 
-* System dependencies
+Datos administrador --> Correo: peter@dsl.cl , clave: asd12345
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+( "los privilegios de administrador se otorgan por consola " User.admin" , en este caso solo peter es administrador")
