@@ -27,9 +27,13 @@
 </table>
 
 <br>
+
+<%= link_to 'back to wines', root_path %>
+
+<br>
 <% if current_user.admin? %>
-  <%= link_to 'Nuevo Enólogo', new_oenologist_path %>
-  <%= link_to 'Nuevo Vino', new_wine_path %>
-  <%= link_to 'Nueva Revista', new_magazine_path %>
-  <%= link_to 'back to wines', root_path %>
+  <%= link_to 'Add New Eonologist', new_oenologist_path %>
+  <%= link_to 'Add New wine', new_wine_path %>
+  <%= link_to 'Add New Magazine', new_magazine_path %>
+  
 <% end %>

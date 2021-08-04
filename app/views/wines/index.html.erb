@@ -26,10 +26,15 @@
   </tbody>
 </table>
 
-<br>
-
-
 <% if current_user.admin? %>
+
+  <th><%= link_to 'Show Eonologist', oenologists_path %></th>
+  <br>
+  <th><%= link_to 'Show strains', strains_path %></th>
+  <br>
+  <th><%= link_to 'Show Magazines', magazines_path %></th>
+  <br>
+
 
   <th><%= link_to 'Add New Wine', new_wine_path %></th>
   <br>
@@ -39,8 +44,10 @@
   <br>
   <th><%= link_to 'Add New Magazine', new_magazine_path %> </th>
 
+<% end %> 
 
-<% end %>
+
 <br>
+
 <%= button_to "Logout", destroy_user_session_path, method: :delete, :class => 'btn btn-light mx-4'  %>
 

@@ -24,4 +24,11 @@
 
 <br>
 
-<%= link_to 'New Position', new_position_path %>
+<br>
+  <%= link_to 'back to wines', root_path %>
+<br>
+<% if current_user.admin? %>
+  <%= link_to 'New Magazine', new_magazine_path %>
+  <%= link_to 'Nuevo Enólogo', new_oenologist_path %>
+  <%= link_to 'Nuevo Vino', new_wine_path %>
+<% end %>
